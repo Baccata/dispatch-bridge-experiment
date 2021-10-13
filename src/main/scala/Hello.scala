@@ -39,8 +39,9 @@ object DispatchBridge {
   type OutcomePromise[F[_]] = Deferred[F, SingleOutcome[F]]
 
   // The very annoying part is that we cannot easily tie locally the
-  // two sides of the soviet interop (without passing values around that is, which may
-  // be .
+  // two sides of the soviet-interop (without passing values around that is, which is
+  // may be possible in ).
+  //
   // So this POC uses a 1-element queue (could be a semaphore) to ensure that
   // the outer call and inner call are tied together. The problem is that it crumbles as soon
   // as the soviet interop needs to call `unsafeRun` more than once on its resource ...
